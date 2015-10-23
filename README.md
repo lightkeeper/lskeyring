@@ -2,8 +2,6 @@
 Installing and Using Python Keyring Lib
 =======================================
 
-.. contents:: **Table of Contents**
-
 ---------------------------
 What is Python keyring lib?
 ---------------------------
@@ -29,24 +27,14 @@ Python keyring lib also provides following build-in keyrings.
 Installation Instructions
 -------------------------
 
-easy_install or pip
-===================
-
-Run easy_install or pip::
-
-    $ easy_install keyring
-    $ pip install keyring
-
 Source installation
 ===================
 
-Download the source tarball, and uncompress it, then run the install command::
-
-    $ wget http://pypi.python.org/packages/source/k/keyring/keyring-0.3.tar.gz
-    $ tar -xzvf keyring-0.3.tar.gz
-    $ cd keyring-0.3
-    $ python setup.py install
-
+```shell
+ git clone https://github.com/lightkeeper/lskeyring.git keyring
+ cd keyring
+ pip install ./
+```
 
 --------------------------
 Configure your keyring lib
@@ -93,12 +81,11 @@ the path of your own backend module. The module name should be written after the
 option.
 
 Here's a sample config file(The full demo can be accessed in the ``demo/keyring.py``):
-::
-
+```
     [backend]
     default-keyring=simplekeyring.SimpleKeyring
     keyring-path=/home/kang/pyworkspace/python-keyring-lib/demo/
-
+```
 
 Write your own keyring backend
 ==============================
@@ -122,7 +109,7 @@ The usage of the three functions:
 For an instance, there's the source code of the demo mentioned above. It's a
 simple keyring which stores the password directly in memory.
 
-::
+```python
 
     """
     simplekeyring.py
@@ -149,7 +136,7 @@ simple keyring which stores the password directly in memory.
         def set_password(self, service, username, password):
             self.password = password
             return 0
-
+```
 
 Set the keyring in runtime
 ==========================
@@ -160,7 +147,8 @@ will be used to store the password in your application.
 
 Here's a code snippet from the ``keyringdemo.py``. It shows the usage of
 ``set_keyring()``
-::
+
+```python
 
     # define a new keyring class which extends the KeyringBackend
     import keyring.backend
@@ -183,7 +171,7 @@ Here's a code snippet from the ``keyringdemo.py``. It shows the usage of
     except keyring.backend.PasswordError:
         print "failed to store password"
     print "password", keyring.get_password("demo-service", "tarek")
-
+```
 
 -----------------------------------------------
 Integrate the keyring lib with your application
@@ -205,7 +193,8 @@ Example
 Here's an example of using keyring for application authorization. It can be
 found in the demo folder of the repository. Note that the faked auth function
 only returns true when the password equals to the username.
-::
+
+```python
 
     """
     auth_demo.py
@@ -263,17 +252,7 @@ only returns true when the password equals to the username.
 
     if __name__ == "__main__":
         main()
-
-------------
-Get involved
-------------
-
-Python keyring lib is an open community project and highly welcomes new
-contributors.
-
-* Repository: http://bitbucket.org/kang/python-keyring-lib/
-* Bug Tracker: http://bitbucket.org/kang/python-keyring-lib/issues/
-* Mailing list: http://groups.google.com/group/python-keyring
+```
 
 Running Tests
 =============
@@ -294,17 +273,25 @@ to avoid interfering with your system environment. For more information, see
 the `virtualenv homepage <http://www.virtualenv.org>`_.
 
 After you've created (or designated) your environment, install keyring into
-the environment by running::
+the environment by running:
+
+```shell
 
     python setup.py develop
+```
 
-Then, invoke your favorite test runner, e.g.::
+Then, invoke your favorite test runner, e.g.:
 
+```shell
     py.test
 
-or::
+```
+or:
+
+```shell
 
     nosetests
+```
 
 Using buildout
 --------------
@@ -316,20 +303,9 @@ buildout is three easy steps::
     2. bin/buildout  # prepare the buildout.
     3. bin/test  # execute the test runner.
 
-For more information about the options that the script provides do execute::
+For more information about the options that the script provides do execute:
+
+```shell
 
     python bin/test --help
-
--------
-Credits
--------
-
-The project was based on Tarek Ziade's idea in `this post`_. Kang Zhang
-initially carried it out as a `Google Summer of Code`_ project, and Tarek
-mentored Kang on this project.
-
-.. _this post: http://tarekziade.wordpress.com/2009/03/27/pycon-hallway-session-1-a-keyring-library-for-python/
-.. _Google Summer of Code: http://socghop.appspot.com/
-
-See CONTRIBUTORS.txt for a complete list of contributors.
-
+```
