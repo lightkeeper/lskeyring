@@ -1,8 +1,8 @@
 # LSKeyring
-A custom version of python-keyring library (version:  keyring-dev2). Added features include:
+A custom version of python-keyring library (version: 0.9.2). Added features include:
 
 - Support for interacting with PyFilesystem
-- APIs to Google Docs and Sheets. 
+- APIs to Google Docs and Sheets.
 
 =======================================
 Installing and Using Python Keyring Lib
